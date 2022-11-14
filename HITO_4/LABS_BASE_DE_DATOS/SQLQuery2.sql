@@ -68,18 +68,20 @@ select COUNT(est.ID_EST)
 from ESTUDIATES as est
 where est.EDAD BETWEEN 21 AND 29 AND est.LICENCIA_DE_CONDUCIR = 1;
 
---Manejo de ER con funciones de agregación
+--Manejo de ER con funciones de agregaciÃ³n
+
 CREATE TABLE ESCUELA(
 ID_ES INT IDENTITY PRIMARY KEY NOT NULL,
 NOMBRE VARCHAR(25) NOT NULL,
 DIRECCION VARCHAR(50) NOT NULL,
 TURNO VARCHAR(25) NOT NULL
 );
+
 INSERT INTO ESCUELA(NOMBRE,DIRECCION,TURNO)
-VALUES('San Simos','Cochabamba','mañana')
-,('Andres Bello','El Alto','mañana-tarde')
-,('Amor de Dios Fe y Alegria','El Alto','mañana-tarde')
-,('Don Bosco','La paz','mañana-tarde-noche');
+VALUES('San Simos','Cochabamba','maÃ±ana')
+,('Andres Bello','El Alto','maÃ±ana-tarde')
+,('Amor de Dios Fe y Alegria','El Alto','maÃ±ana-tarde')
+,('Don Bosco','La paz','maÃ±ana-tarde-noche');
 
 --MUESTRA EL VALOR DE PI
 select pi() as PI;
@@ -91,26 +93,26 @@ SELECT * FROM ESTUDIATES
 select count(est.ID_EST)
 from ESTUDIATES as est
 where est.LICENCIA_DE_CONDUCIR =1;
---2
+
 select count(est.ID_EST)
 from ESTUDIATES as est
 where est.EDAD < 20 AND est.LICENCIA_DE_CONDUCIR =1;
---3
+
 select count(est.ID_EST)
 from ESTUDIATES as est
 INNER JOIN ESCUELA AS esc on esc.ID_ES=est.ID_ES
 where esc.NOMBRE='Amor de Dios Fe y Alegria';
---4
+
 select count(est.ID_EST)
 from ESTUDIATES as est
 INNER JOIN ESCUELA AS esc on esc.ID_ES=est.ID_ES
-where esc.TURNO='mañana-tarde';
---5
+where esc.TURNO='maÃ±ana-tarde';
+
 select count(est.ID_EST)
 from ESTUDIATES as est
 INNER JOIN ESCUELA AS esc on esc.ID_ES=est.ID_ES
 where est.EDAD>25 and esc.TURNO='tarde';
---6
+
 select count(est.ID_EST)
 from ESTUDIATES as est
 INNER JOIN ESCUELA AS esc on esc.ID_ES=est.ID_ES
@@ -127,9 +129,9 @@ end;
 create function retorna_nombre_materia_V2 () 
 returns varchar(25) as 
 begin
-		DECLARE @NOMBRE VARCHAR(25);
-		SET @NOMBRE ='BASE DE DATOS I';
-		RETURN @NOMBRE;
+	DECLARE @NOMBRE VARCHAR(25);
+	SET @NOMBRE ='BASE DE DATOS I';
+	RETURN @NOMBRE;
 end;
 
 create function retorna_nombre_materia_V3 (@NOMBREMATERIA VARCHAR(25)) 
@@ -137,13 +139,14 @@ returns varchar(25) as
 begin
      DECLARE @NOMBRE VARCHAR(25);
      SET @NOMBRE =@NOMBREMATERIA;
-	 RETURN @NOMBRE;
+     RETURN @NOMBRE;
 end;
 
 select dbo.retorna_nombre_materia() as DBA;
 select dbo.retorna_nombre_materia_V2() as DBA;
 select dbo.retorna_nombre_materia_V3('base de datos II') as DBA;
---SE PUEDE USAR ALTER Y DROP
+
+
 
 ALTER function retorna_nombre_materia_V2 () 
 returns varchar(25) as 
@@ -152,17 +155,18 @@ begin
 	SET @NOMBRE ='BASE DE DATOS II';
 	RETURN @NOMBRE;
 end;
---EJERCICIO 1------------------------------------------
+
 create function SUMA_DE_3_NUMEROSS (@NUM1 INTEGER, @NUM2 INTEGER,@NUM3 INTEGER) 
 returns INTEGER as 
 begin
-		DECLARE @RESPUESTA INTEGER;
-		SET @RESPUESTA = @NUM1 + @NUM2+@NUM3;
-		RETURN @RESPUESTA;
+	DECLARE @RESPUESTA INTEGER;
+	SET @RESPUESTA = @NUM1 + @NUM2+@NUM3;
+	RETURN @RESPUESTA;
 end;
 SELECT dbo.SUMA_DE_3_NUMEROSS(5,7,8) AS SUMA;
 
----SUMA DE 2 NUMEROS
+
+
 create function SUMA_DE_2_NUMEROSS () 
 returns INTEGER as 
 begin
@@ -172,13 +176,5 @@ begin
 end;
 SELECT dbo.SUMA_DE_2_NUMEROSS() AS SUMA;
 
---RETORNE UN NOMBRE COMPLETO
 
-ALTER function NOMBRE_COMPLETO (@NOMBRE VARCHAR(25), @APELLIDO VARCHAR(25)) 
-returns VARCHAR(50) as 
-begin
-		DECLARE @RESPUESTA VARCHAR(50);
-		SET @RESPUESTA = @NOMBRE + @APELLIDO;
-		RETURN @RESPUESTA;
-end;
-SELECT dbo.NOMBRE_COMPLETO ('JUAN','PEREZ') AS NOMBRE;
+
